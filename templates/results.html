@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Regression Results</title>
+    <!-- Bootstrap used for clean styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Regression Results</h1>
+    <div class="results">
+        <p><strong>Polynomial Degree:</strong> {{ metrics.poly_degree }}</p>
+        <p><strong>Features Used:</strong> {{ metrics.features_used | join(', ') }}</p>
+        <p><strong>Mean Squared Error:</strong> {{ metrics.mse }}</p>
+        <p><strong>R2 Score:</strong> {{ metrics.r2 }}</p>
+    </div>
+    <div>
+        <h3>Actual vs Predicted Selling Price</h3>
+        <img src="data:image/png;base64,{{ plot_url }}" class="img-fluid" alt="Plot">
+    </div>
+    <br>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Settings</a>
+</div>
+</body>
+</html>
