@@ -2,8 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Car Price Regression</title>
-    <!-- Bootstrap used for clean styling -->
+    <title>Car Price Regression Settings</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         .container {
@@ -14,6 +13,15 @@
 <body>
 <div class="container">
     <h1 class="mb-4">Car Price Prediction Settings</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-warning">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
     <form method="post">
         <div class="form-group">
             <label for="poly_degree">Polynomial Degree:</label>
@@ -28,14 +36,15 @@
             <label>Select Features to Use:</label>
             <div class="form-check">
                 {% for feature in available_features %}
-                    <input class="form-check-input" type="checkbox" name="features" value="{{ feature }}"
-                           id="{{ feature }}">
-                    <label class="form-check-label" for="{{ feature }}">
-                        {{ feature }}
-                    </label><br>
+                    <input class="form-check-input" type="checkbox" name="features" value="{{ feature }}" id="{{ feature }}">
+                    <label class="form-check-label" for="{{ feature }}">{{ feature }}</label><br>
                 {% endfor %}
             </div>
             <small class="form-text text-muted">If no feature is selected, all features will be used.</small>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" name="use_gd" id="use_gd">
+            <label class="form-check-label" for="use_gd">Use Gradient Descent for Training (with cost & descent visualization)</label>
         </div>
         <button type="submit" class="btn btn-primary">Run Regression</button>
     </form>

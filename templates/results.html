@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Regression Results</title>
-    <!-- Bootstrap used for clean styling -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         .container {
@@ -23,11 +22,28 @@
         <p><strong>Features Used:</strong> {{ metrics.features_used | join(', ') }}</p>
         <p><strong>Mean Squared Error:</strong> {{ metrics.mse }}</p>
         <p><strong>R2 Score:</strong> {{ metrics.r2 }}</p>
+        {% if metrics.used_gradient_descent %}
+            <p><em>Trained using Gradient Descent.</em></p>
+        {% else %}
+            <p><em>Trained using scikit-learn's Linear Regression.</em></p>
+        {% endif %}
     </div>
     <div>
         <h3>Actual vs Predicted Selling Price</h3>
-        <img src="data:image/png;base64,{{ plot_url }}" class="img-fluid" alt="Plot">
+        <img src="data:image/png;base64,{{ plot_url }}" class="img-fluid" alt="Prediction Plot">
     </div>
+    {% if cost_plot_url %}
+        <div>
+            <h3>Cost Function History</h3>
+            <img src="data:image/png;base64,{{ cost_plot_url }}" class="img-fluid" alt="Cost Function Plot">
+        </div>
+    {% endif %}
+    {% if gd_plot_url %}
+        <div>
+            <h3>Gradient Descent Path</h3>
+            <img src="data:image/png;base64,{{ gd_plot_url }}" class="img-fluid" alt="Gradient Descent Path">
+        </div>
+    {% endif %}
     <br>
     <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Settings</a>
 </div>
