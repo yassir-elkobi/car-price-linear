@@ -2,17 +2,25 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Car Price Regression Settings</title>
+    <title>Regression Algorithm Settings</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         .container {
             margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            background-color: #f8f9fa;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="mb-4">Car Price Prediction Settings</h1>
+    <h1 class="mb-4">Regression Algorithm Settings</h1>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="alert alert-warning">
@@ -23,31 +31,100 @@
         {% endif %}
     {% endwith %}
     <form method="post">
-        <div class="form-group">
-            <label for="poly_degree">Polynomial Degree:</label>
-            <select class="form-control" name="poly_degree" id="poly_degree">
-                <option value="1">1 (Linear Regression)</option>
-                <option value="2">2 (Quadratic)</option>
-                <option value="3">3 (Cubic)</option>
-                <option value="4">4</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Select Features to Use:</label>
-            <div class="form-check">
-                {% for feature in available_features %}
-                    <input class="form-check-input" type="checkbox" name="features" value="{{ feature }}" id="{{ feature }}">
-                    <label class="form-check-label" for="{{ feature }}">{{ feature }}</label><br>
-                {% endfor %}
+        <div class="form-section">
+            <h4>Algorithm Type</h4>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="algorithm_type" value="linear" id="linear" checked>
+                    <label class="form-check-label" for="linear">Linear Regression</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="algorithm_type" value="polynomial" id="polynomial">
+                    <label class="form-check-label" for="polynomial">Polynomial Regression</label>
+                </div>
             </div>
-            <small class="form-text text-muted">If no feature is selected, all features will be used.</small>
         </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" name="use_gd" id="use_gd">
-            <label class="form-check-label" for="use_gd">Use Gradient Descent for Training (with cost & descent visualization)</label>
+
+        <div class="form-section">
+            <h4>Algorithm Options</h4>
+            <div class="form-group">
+                <label for="poly_degree">Polynomial Degree:</label>
+                <select class="form-control" name="poly_degree" id="poly_degree">
+                    <option value="1">1 (Linear)</option>
+                    <option value="2">2 (Quadratic)</option>
+                    <option value="3">3 (Cubic)</option>
+                    <option value="4">4 (Quartic)</option>
+                </select>
+                <small class="form-text text-muted">For polynomial regression, choose the highest degree of the polynomial.</small>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="use_regularization" id="use_regularization">
+                <label class="form-check-label" for="use_regularization">Apply Regularization</label>
+            </div>
+
+            <div class="form-group" id="lambda_group">
+                <label for="lambda">Lambda (Regularization Strength):</label>
+                <input type="number" class="form-control" name="lambda" id="lambda" value="0.1" min="0" step="0.01">
+                <small class="form-text text-muted">Higher values mean stronger regularization.</small>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="use_cv" id="use_cv">
+                <label class="form-check-label" for="use_cv">Use Cross-Validation (5-fold)</label>
+            </div>
+
+            <div class="form-group">
+                <label for="scaling_method">Feature Scaling Method:</label>
+                <select class="form-control" name="scaling_method" id="scaling_method">
+                    <option value="none">None</option>
+                    <option value="mean_normalization">Mean Normalization</option>
+                    <option value="standardization">Standardization (Z-score)</option>
+                </select>
+                <small class="form-text text-muted">Scaling can help gradient descent converge faster.</small>
+            </div>
         </div>
+
+        <div class="form-section">
+            <h4>Gradient Descent Parameters</h4>
+            <div class="form-group">
+                <label for="alpha">Learning Rate (Alpha):</label>
+                <input type="number" class="form-control" name="alpha" id="alpha" value="0.01" min="0.0001" max="1" step="0.0001">
+            </div>
+
+            <div class="form-group">
+                <label for="num_iters">Number of Iterations:</label>
+                <input type="number" class="form-control" name="num_iters" id="num_iters" value="1000" min="100" max="10000" step="100">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h4>Features</h4>
+            <div class="form-group">
+                <label>Select Features to Use:</label>
+                <div class="form-check">
+                    {% for feature in available_features %}
+                        <input class="form-check-input" type="checkbox" name="features" value="{{ feature }}" id="{{ feature }}">
+                        <label class="form-check-label" for="{{ feature }}">{{ feature }}</label><br>
+                    {% endfor %}
+                </div>
+                <small class="form-text text-muted">If no feature is selected, all features will be used.</small>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">Run Regression</button>
     </form>
 </div>
+
+<script>
+    // Show/hide lambda input based on regularization checkbox
+    document.getElementById('use_regularization').addEventListener('change', function() {
+        document.getElementById('lambda_group').style.display = this.checked ? 'block' : 'none';
+    });
+    
+    // Initialize display state on page load
+    document.getElementById('lambda_group').style.display = 
+        document.getElementById('use_regularization').checked ? 'block' : 'none';
+</script>
 </body>
 </html>
