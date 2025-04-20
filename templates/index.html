@@ -9,6 +9,7 @@
             margin-top: 30px;
             margin-bottom: 30px;
         }
+
         .form-section {
             margin-bottom: 20px;
             padding: 15px;
@@ -118,12 +119,12 @@
 
 <script>
     // Show/hide lambda input based on regularization checkbox
-    document.getElementById('use_regularization').addEventListener('change', function() {
+    document.getElementById('use_regularization').addEventListener('change', function () {
         document.getElementById('lambda_group').style.display = this.checked ? 'block' : 'none';
     });
-    
+
     // Initialize display state on page load
-    document.getElementById('lambda_group').style.display = 
+    document.getElementById('lambda_group').style.display =
         document.getElementById('use_regularization').checked ? 'block' : 'none';
 </script>
 </body>
