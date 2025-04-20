@@ -76,7 +76,7 @@ If you want to run this web app on your local machine, follow these steps:
 
 ## Learning Goals
 
-This project was developed as part of the author’s journey to learn and demonstrate machine learning engineering skills.
+This project was developed as part of my journey to learn and demonstrate machine learning engineering skills.
 The primary learning goal was to **implement regression models from scratch** and integrate them into a full web
 application.
 
