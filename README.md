@@ -8,23 +8,23 @@ deployment.
 
 ## Features
 
-- **Linear & Polynomial Regression:**
-- **Gradient Descent Optimization:**
-- **L2 Regularization (Ridge):**
-- **Feature Selection:**
-- **Feature Scaling Options:**
-- **Cross-Validation and MSE Evaluation:**
-- **Visualizations:**
-- **Interactive Predictions:**
+- **Linear & Polynomial Regression**
+- **Gradient Descent Optimization**
+- **L2 Regularization (Ridge)**
+- **Feature Selection**
+- **Feature Scaling Options**
+- **Cross-Validation and MSE Evaluation**
+- **Visualizations**
+- **Interactive Predictions**
 
 ## Tech Stack and Tools
 
-- **Python 3:**
-- **Flask:**
-- **Pandas:**
-- **NumPy:**
-- **Matplotlib:**
-- **scikit-learn (for preprocessing only):**
+- **Python 3**
+- **Flask**
+- **Pandas**
+- **NumPy**
+- **Matplotlib**
+- **scikit-learn (for preprocessing only)**
 
 ## Best Model Configuration
 
@@ -44,9 +44,9 @@ CarDekho.com. The dataset contains **4,340 rows** (car entries) and **8 columns*
 with the
 target selling price. It’s a mix of numerical and categorical data. Key features include:
 
-- **Car Age or Year:**
-- **Car Brand/Model:**
-- **Kms Driven (Mileage):**
+- **Car Age or Year**
+- **Car Brand/Model**
+- **Kms Driven (Mileage)**
 - **Fuel Type:** Petrol, Diesel, CNG, etc
 - **Transmission:** Manual or Automatic
 - **Seller Type:** Whether the car is being sold by a **Dealer** or an **Individual (private seller)**
