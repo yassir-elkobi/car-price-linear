@@ -1,8 +1,8 @@
-# Car Price Predictor with Gradient Descent
+# Car Price Predictor with Linear Regression
 
 **Car Price Predictor with Gradient Descent** is a Flask web application that predicts the selling price of a used car
 based on various features. It implements both linear and polynomial regression models *from scratch* using gradient
-descent (instead of relying on scikit-learn for model training). This project is part of a machine learning learning
+descent (instead of relying on scikit-learn for model training). This project is part of my machine learning
 journey, aiming to solidify understanding of regression algorithms, gradient descent optimization, and end-to-end model
 deployment.
 
@@ -42,7 +42,7 @@ task:
 The model is trained on a dataset of used cars (originally provided by
 CarDekho.com. The dataset contains **4,340 rows** (car entries) and **8 columns** of features describing each car, along
 with the
-target selling price. It’s a mix of numerical and categorical data. Key features include:
+target selling price. It's a mix of numerical and categorical data. Key features include:
 
 - **Car Age or Year**
 - **Car Brand/Model**
@@ -55,24 +55,38 @@ target selling price. It’s a mix of numerical and categorical data. Key featur
 The **target** variable is the *Selling_Price* of the car (the price at which the car is being sold in the used car
 market).
 
+## Project Structure
+
+```
+├── app.py                 # Main Flask application
+├── model.py               # Linear & polynomial regression model implementation
+├── preprocessing.py       # Data loading and preprocessing functions
+├── utils.py               # Evaluation metrics and visualization utilities
+├── requirements.txt       # Project dependencies
+├── static/                # Static files (CSS, data files)
+│   └── car_details_from_car_dehkho.csv  # Car dataset
+└── templates/             # HTML templates
+    ├── index.html         # Settings page
+    └── results.html       # Results visualization page
+```
+
 ## How to Run the App Locally
 
-If you want to run this web app on your local machine, follow these steps:
-
 1. **Clone the repository** or download the project source code to your local machine.
-2. **Install Python dependencies:** Make sure you have Python 3 installed, then install the required libraries. You can
-   do this by running:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Run the Flask application:** In your terminal, navigate to the project directory and run the app. For example:
-   ```bash
-   python app.py
-   ```  
-   (Or use `flask run` if the project is set up with Flask CLI). You should see Flask start up and indicate that it’s
-   running on a local address (by default http://127.0.0.1:5000 or http://localhost:5000).
-4. **Open the web app in your browser:** Launch a web browser and navigate to the local URL (e.g.,
-   `http://localhost:5000`). You should see the Car Price Predictor web interface.
+2. **Create a virtual environment:**  
+```  
+python -m venv .venv  
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate  
+```
+3. **Install Python dependencies:**  
+```  
+pip install -r requirements.txt  
+```
+4. **Run the Flask application:**  
+```  
+python app.py  
+```
+5. **Open the web app in your browser:** Navigate to <http://127.0.0.1:5000/>
 
 ## Learning Goals
 
@@ -81,5 +95,5 @@ The primary learning goal was to **implement regression models from scratch** an
 application.
 
 **Note:** This README is written to be clear and informative for any new visitor (or recruiter) checking out the
-project. It highlights the project’s purpose, capabilities, technical implementation, and the learning outcomes
+project. It highlights the project's purpose, capabilities, technical implementation, and the learning outcomes
 associated with it.
